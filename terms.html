@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src https://www.google-analytics.com; img-src 'self' data:;">
+  <title>利用規約 | W-Flow</title>
+  <meta name="description" content="W-Flowの利用規約です。">
+  <meta name="robots" content="noindex,follow">
+  <link rel="icon" href="./Wflow/素材/logo/透過.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Google Analytics GA4 (loaded after cookie consent) -->
+  <script>
+  window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+  function loadGA(){
+    if(document.querySelector('script[src*="googletagmanager"]'))return;
+    var s=document.createElement('script');s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+    document.head.appendChild(s);
+    gtag('js',new Date());gtag('config','G-XXXXXXXXXX');
+  }
+  if(localStorage.getItem('wflow_cookie_consent')==='accepted'){loadGA();}
+  </script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP',sans-serif;font-weight:300;color:#1a1a1a;background:#fafaf8;line-height:1.9;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;display:block;}
+
+:root{
+  --navy:#1B2E4A;--navy-dk:#0C1A2C;
+  --gold:#B8942A;--gold-l:#D4AF6A;
+}
+
+.pp-header{background:var(--navy-dk);padding:0 6%;height:60px;display:flex;align-items:center;justify-content:space-between;}
+.pp-logo{display:flex;align-items:center;gap:10px;color:#fff;}
+.logo-bg{background:rgba(255,255,255,.97);border-radius:6px;padding:4px 7px;display:inline-flex;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.pp-logo-t{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;letter-spacing:.12em;}
+.pp-logo-t em{font-style:normal;color:var(--gold-l);}
+.pp-back{font-size:.7rem;letter-spacing:.1em;color:rgba(255,255,255,.4);transition:color .3s;}
+.pp-back:hover{color:var(--gold-l);}
+
+.pp-wrap{max-width:760px;margin:0 auto;padding:64px 6% 96px;}
+.pp-hero{margin-bottom:56px;padding-bottom:32px;border-bottom:1px solid rgba(0,0,0,.08);}
+.pp-label{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.pp-ttl{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:300;color:var(--navy-dk);line-height:1.3;}
+.pp-date{font-size:.72rem;color:#999;margin-top:10px;letter-spacing:.04em;}
+
+.pp-sec{margin-bottom:44px;}
+.pp-sec h2{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(27,46,74,.12);}
+.pp-sec p{font-size:.88rem;color:#444;margin-bottom:.9em;}
+.pp-sec ol{padding-left:1.6em;font-size:.88rem;color:#444;margin-bottom:.9em;}
+.pp-sec ol li{padding:4px 0;line-height:1.9;}
+
+.pp-footer{background:var(--navy-dk);padding:28px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.pp-footer p{font-size:.62rem;color:rgba(255,255,255,.2);letter-spacing:.08em;}
+.pp-footer a{font-size:.68rem;color:rgba(255,255,255,.3);transition:color .3s;}
+.pp-footer a:hover{color:var(--gold-l);}
+.pp-footer nav{display:flex;gap:16px;flex-wrap:wrap;}
+
+#cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:10000;background:rgba(12,26,44,.96);backdrop-filter:blur(12px);padding:18px 6%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(184,148,42,.2);transform:translateY(100%);transition:transform .4s ease;}
+#cookie-banner.show{transform:translateY(0);}
+#cookie-banner p{font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.7;flex:1;min-width:200px;}
+#cookie-banner a{color:var(--gold-l);text-decoration:underline;}
+.cb-btns{display:flex;gap:10px;flex-shrink:0;}
+.cb-btn{padding:9px 22px;font-size:.72rem;font-weight:500;letter-spacing:.1em;border:none;cursor:pointer;transition:opacity .3s;}
+.cb-accept{background:linear-gradient(135deg,var(--gold),var(--gold-l));color:var(--navy-dk);}
+.cb-reject{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);}
+.cb-btn:hover{opacity:.85;}
+</style>
+</head>
+<body>
+
+<header class="pp-header">
+  <a href="./index.html" class="pp-logo">
+    <span class="logo-bg"><img src="./Wflow/素材/logo/透過.png" alt="W-Flow" style="height:22px;"></span>
+    <span class="pp-logo-t">W&#8209;<em>Flow</em></span>
+  </a>
+  <a href="./index.html" class="pp-back">&larr; ホームへ戻る</a>
+</header>
+
+<main class="pp-wrap">
+
+  <div class="pp-hero">
+    <p class="pp-label">Terms of Service</p>
+    <h1 class="pp-ttl">利用規約</h1>
+    <p class="pp-date">制定日：2026年3月3日</p>
+  </div>
+
+  <section class="pp-sec">
+    <h2>第1条（適用範囲）</h2>
+    <p>本規約は、W-Flow（以下「当事業者」）が提供するすべてのサービス（スクレイピング・業務自動化・SOP作成・資料制作・Web制作・コンサルティング等）のご利用に適用されます。お客様がサービスをご依頼された時点で、本規約に同意したものとみなします。</p>
+  </section>
+
+  <section class="pp-sec">
+    <h2>第2条（サービスの内容）</h2>
+    <p>当事業者は、お客様との事前合意に基づき、以下のサービスを提供します。具体的な内容・範囲・仕様は、個別のヒアリングおよびお見積りにて確定します。</p>
+    <ol>
+      <li>Webスクレイピング・データ収集</li>
+      <li>システム開発・業務自動化</li>
+      <li>SOP・業務マニュアル作成</li>
+      <li>資料作成・プレゼン制作</li>
+      <li>Webサイト・LP制作</li>
+      <li>業務効率化コンサルティング</li>
+    </ol>
+  </section>
+
+  <section class="pp-sec">
+    <h2>第3条（お見積り・ご注文）</h2>
+    <p>お見積りは無料です。お見積り内容にご承諾いただいた時点で正式なご注文となります。お見積り有効期限は、提示日から14日間とします。</p>
+  </section>
+
+  <section class="pp-sec">
+    <h2>第4条（お支払い）</h2>
+    <p>お支払いは原則として納品前の銀行振込とします。お支払い方法・時期については個別にご相談いただけます。お支払い確認後にサービスの提供を開始します。</p>
+  </section>
+
+  <section class="pp-sec">
+    <h2>第5条（キャンセル・返金）</h2>
+    <p>制作着手前のキャンセルについては全額返金いたします。制作着手後のキャンセルは、進捗状況に応じた費用をご請求させていただく場合があります。</p>
+  </section>
+
+  <section class="pp-sec">
+    <h2>第6条（納品・検収）</h2>
+    <p>納品物はお客様にご確認いただき、納品後7日以内に修正依頼がない場合は検収完了とみなします。仕様に基づく不備については、検収期間内に無償で修正対応いたします。</p>
+  </section>
+
+  <section class="pp-sec">
+    <h2>第7条（知的財産権）</h2>
+    <p>納品物の著作権は、お支払いの完了をもってお客様に帰属します。ただし、当事業者が制作過程で使用した汎用的な技術・ノウハウ・ライブラリについては当事業者に帰属するものとします。</p>
+  </section>
+
+  <section class="pp-sec">
+    <h2>第8条（秘密保持）</h2>
+    <p>当事業者は、サービスの提供に際してお客様から開示された情報を秘密として管理し、お客様の事前の承諾なく第三者に開示・漏洩しません。</p>
+  </section>
+
+  <section class="pp-sec">
+    <h2>第9条（免責事項）</h2>
+    <p>当事業者は、以下の場合において損害賠償責任を負いません。</p>
+    <ol>
+      <li>お客様の指示に基づく制作物の内容に起因する損害</li>
+      <li>第三者のサービス（API・Webサイト等）の仕様変更・停止に起因する動作不全</li>
+      <li>お客様の環境・設定に起因する不具合</li>
+      <li>天災・通信障害その他不可抗力による損害</li>
+    </ol>
+    <p>当事業者の損害賠償責任は、いかなる場合も、お客様が当該サービスに対してお支払い済みの金額を上限とします。</p>
+  </section>
+
+  <section class="pp-sec">
+    <h2>第10条（スクレイピングに関する特記事項）</h2>
+    <p>当事業者は、スクレイピング案件において対象サイトのrobots.txt・利用規約を確認し、法的・倫理的に適切な方法で収集を行います。ただし、収集データの利用方法・目的についてはお客様の責任のもとで管理していただきます。対象サイトの利用規約に違反するご依頼はお断りする場合があります。</p>
+  </section>
+
+  <section class="pp-sec">
+    <h2>第11条（規約の変更）</h2>
+    <p>本規約は、法令の改正やサービス内容の変更に伴い改定することがあります。改定後は本ページにて公示します。</p>
+  </section>
+
+  <section class="pp-sec">
+    <h2>第12条（準拠法・管轄裁判所）</h2>
+    <p>本規約は日本法に準拠し、本規約に関連する紛争については、東京地方裁判所を第一審の専属的合意管轄裁判所とします。</p>
+  </section>
+
+</main>
+
+<footer class="pp-footer">
+  <p>&copy; 2026 W-Flow. All rights reserved.</p>
+  <nav>
+    <a href="./index.html">ホームへ戻る</a>
+    <a href="./privacy.html">プライバシーポリシー</a>
+    <a href="./tokusho.html">特定商取引法に基づく表記</a>
+  </nav>
+</footer>
+
+<div id="cookie-banner">
+  <p>当サイトでは、アクセス解析のためにCookieを使用しています。詳しくは<a href="./privacy.html">プライバシーポリシー</a>をご覧ください。</p>
+  <div class="cb-btns">
+    <button class="cb-btn cb-reject" onclick="handleCookie('rejected')">拒否</button>
+    <button class="cb-btn cb-accept" onclick="handleCookie('accepted')">同意する</button>
+  </div>
+</div>
+<script>
+function handleCookie(v){localStorage.setItem('wflow_cookie_consent',v);document.getElementById('cookie-banner').classList.remove('show');if(v==='accepted')loadGA();}
+if(!localStorage.getItem('wflow_cookie_consent')){setTimeout(function(){document.getElementById('cookie-banner').classList.add('show');},800);}
+</script>
+
+</body>
+</html>

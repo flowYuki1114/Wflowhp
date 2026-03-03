@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+test.txt
+test2.txt
+Wflow/
+.env
+.env.*
+*.log

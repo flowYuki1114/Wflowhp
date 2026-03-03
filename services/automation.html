@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src https://www.google-analytics.com; img-src 'self' data:;">
+  <title>システム開発・業務自動化 | W-Flow</title>
+  <meta name="description" content="繰り返し作業のスクリプト化、API連携、Excel自動化、データパイプライン構築。「手作業」を「自動」に変えます。¥20,000〜・納期5〜10日。">
+  <link rel="icon" href="../Wflow/素材/logo/透過.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="./style.css">
+  <!-- OGP -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="システム開発・業務自動化 | W-Flow">
+  <meta property="og:description" content="繰り返し作業のスクリプト化、API連携、Excel自動化、データパイプライン構築。「手作業」を「自動」に変えます。¥20,000〜・納期5〜10日。">
+  <meta property="og:url" content="https://w-flow.jp/services/automation.html">
+  <meta property="og:image" content="https://w-flow.jp/ogp.png">
+  <meta property="og:site_name" content="W-Flow">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://w-flow.jp/ogp.png">
+  <!-- GA4 (loaded after cookie consent) -->
+  <script>
+  window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+  function loadGA(){
+    if(document.querySelector('script[src*="googletagmanager"]'))return;
+    var s=document.createElement('script');s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+    document.head.appendChild(s);
+    gtag('js',new Date());gtag('config','G-XXXXXXXXXX');
+  }
+  if(localStorage.getItem('wflow_cookie_consent')==='accepted'){loadGA();}
+  </script>
+</head>
+<body>
+
+<div class="cur" id="curDot"></div>
+<div class="cur-r" id="curRing"></div>
+<div id="prog"></div>
+
+<div id="float-line">
+  <a href="https://lin.ee/01ZHw9z" target="_blank" rel="noopener noreferrer" class="fl-btn">
+    <i class="fa-brands fa-line"></i>
+    <span class="fl-badge">最速対応</span>
+  </a>
+  <span class="fl-label">LINEで相談</span>
+</div>
+
+<header id="hdr">
+  <a href="../index.html" class="hd-logo">
+    <span class="logo-bg"><img src="../Wflow/素材/logo/透過.png" alt="W-Flow" style="height:28px;"></span>
+    <span class="logo-t">W<em>-Flow</em></span>
+  </a>
+  <div class="hd-right">
+    <a href="../index.html#services" class="hd-back"><i class="fa-solid fa-chevron-left"></i> サービス一覧</a>
+    <a href="#contact" class="hd-cta"><i class="fa-solid fa-comment-dots" style="font-size:.7rem;"></i> 無料相談</a>
+  </div>
+</header>
+
+<div class="sv-hero">
+  <div class="sv-hero-bg"></div>
+  <div class="sv-hero-ov"></div>
+  <div class="sv-wm">W</div>
+  <div class="sv-con">
+    <div class="sv-breadcrumb">
+      <a href="../index.html">Home</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <a href="../index.html#services">Services</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <span>Automation</span>
+    </div>
+    <p class="sv-cat">Service 02 — Automation</p>
+    <i class="sv-icon-big fa-solid fa-code"></i>
+    <h1 class="sv-h1">繰り返し作業を、<br><em>ゼロ</em>にします。</h1>
+    <p class="sv-sub">毎日夜遅くまでExcelを手入力している、その時間は取り戻せます。Python・VBA・API連携で「手作業」を「自動」に置き換え、チームの生産性を根本から変えます。</p>
+    <div class="sv-btns">
+      <a href="#contact" class="btn-g"><i class="fa-brands fa-line" style="font-size:.8rem;"></i> LINEで無料相談</a>
+      <a href="#price" class="btn-ghost">料金を見る <i class="fa-solid fa-chevron-down" style="font-size:.6rem;"></i></a>
+    </div>
+    <div class="sv-stats">
+      <div class="sv-stat">
+        <div class="sv-stat-v">¥20,000<span style="font-size:1rem;">〜</span></div>
+        <div class="sv-stat-l">スタート価格</div>
+      </div>
+      <div class="sv-stat">
+        <div class="sv-stat-v">5〜10<span style="font-size:1rem;">日</span></div>
+        <div class="sv-stat-l">標準納期</div>
+      </div>
+      <div class="sv-stat">
+        <div class="sv-stat-v">100<span style="font-size:1rem;">%</span></div>
+        <div class="sv-stat-l">納期遵守率</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="sv-prob">
+  <div class="sec-hd">
+    <span class="lbl lbl-w fu">Pain Point</span>
+    <div class="rw"><h2 class="ttl ttl-w rv">こんな<em>課題</em>ありませんか？</h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="prob-grid fu d2">
+    <div class="prob-card">
+      <div class="prob-icon"><i class="fa-solid fa-repeat"></i></div>
+      <div>
+        <p class="prob-q">毎日同じ作業を<br>ひたすら繰り返している</p>
+        <p class="prob-a">ファイルコピー・データ転記・集計作業。パターンが決まっているならすべて自動化できます。</p>
+      </div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon"><i class="fa-solid fa-file-excel"></i></div>
+      <div>
+        <p class="prob-q">Excelの手入力・集計に<br>何時間もかかっている</p>
+        <p class="prob-a">複数シートの集計・グラフ更新・レポート生成。VBA・Pythonで数秒〜数分に短縮できます。</p>
+      </div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div>
+        <p class="prob-q">コピペミス・入力ミスが<br>頻繁に発生する</p>
+        <p class="prob-a">手作業ゆえのヒューマンエラー。自動化すればミスは構造的にゼロになります。</p>
+      </div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon"><i class="fa-solid fa-plug"></i></div>
+      <div>
+        <p class="prob-q">複数ツール間のデータ連携が<br>手動でつらい</p>
+        <p class="prob-a">kintone・Slack・Google Sheets・freeeなど、API連携でリアルタイム自動同期できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sv-sol">
+  <div class="sec-hd">
+    <span class="lbl fu">Deliverables</span>
+    <div class="rw"><h2 class="ttl rv">W-Flowが<em>提供するもの</em></h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="sol-grid">
+    <div class="sol-card fu d1">
+      <div class="sol-n">01</div>
+      <div class="sol-icon"><i class="fa-solid fa-terminal"></i></div>
+      <div class="sol-ttl">Python業務自動化スクリプト</div>
+      <p class="sol-tx">ファイル処理・データ変換・メール送信・レポート生成などを自動化。定期実行設定、ログ出力、エラー通知まで含めた本番運用できるスクリプトを納品します。</p>
+    </div>
+    <div class="sol-card fu d2">
+      <div class="sol-n">02</div>
+      <div class="sol-icon"><i class="fa-solid fa-file-excel"></i></div>
+      <div class="sol-ttl">Excel VBAマクロ</div>
+      <p class="sol-tx">Excelベースの集計・レポート自動生成・フォーマット統一・シート間連携。ボタンひとつで完了する業務フローを構築します。MOS Expert取得の確かな品質です。</p>
+    </div>
+    <div class="sol-card fu d3">
+      <div class="sol-n">03</div>
+      <div class="sol-icon"><i class="fa-solid fa-network-wired"></i></div>
+      <div class="sol-ttl">API連携・システム統合</div>
+      <p class="sol-tx">Slack・kintone・Google Workspace・freee・各種SaaS APIを組み合わせた自動化。人手を介さないデータフローを設計・構築します。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sv-cases">
+  <div class="sec-hd">
+    <span class="lbl fu">Case Studies</span>
+    <div class="rw"><h2 class="ttl rv">解決<em>事例</em></h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="cases-grid">
+    <div class="case-card fu d1">
+      <p class="case-cat">Excel / 帳票自動化</p>
+      <h3 class="case-ttl">月次請求書100件をボタン1つで自動生成</h3>
+      <p class="case-tx">顧客マスタ・注文データからPDF請求書を一括生成するVBAマクロを構築。毎月3時間かかっていた手入力作業が5分以内に。ミス発生率もゼロに。</p>
+      <span class="case-result">月3時間の作業が5分へ・ミスゼロ</span>
+    </div>
+    <div class="case-card fu d2">
+      <p class="case-cat">API連携 / 通知自動化</p>
+      <h3 class="case-ttl">フォーム受付→kintone登録→Slack通知を全自動化</h3>
+      <p class="case-tx">Google Formの回答をkintoneに自動登録し、担当者へSlackで即時通知するフローを構築。以前は手動でコピペしていた作業が完全ゼロに。対応漏れも解消。</p>
+      <span class="case-result">手動入力ゼロ・担当者の対応が大幅に迅速化</span>
+    </div>
+    <div class="case-card fu d3">
+      <p class="case-cat">データ処理 / レポート</p>
+      <h3 class="case-ttl">複数店舗の売上データを毎朝自動集計・グラフ化</h3>
+      <p class="case-tx">各店舗のPOSデータをCSVで受け取り、自動集計・可視化・Excelレポート生成するPythonスクリプトを構築。朝礼前に最新レポートが揃う体制が実現。</p>
+      <span class="case-result">毎朝レポートが自動で出力</span>
+    </div>
+    <div class="case-card fu d4">
+      <p class="case-cat">ファイル管理 / 整理</p>
+      <h3 class="case-ttl">受注ファイルの自動振り分け・命名規則統一</h3>
+      <p class="case-tx">メール添付ファイルを自動取得し、日付・顧客名・案件種別でフォルダ振り分け・リネームするスクリプトを構築。ファイル管理の属人化を解消。</p>
+      <span class="case-result">ファイル整理を完全自動化</span>
+    </div>
+  </div>
+</section>
+
+<section class="sv-price" id="price">
+  <div class="sec-hd">
+    <span class="lbl lbl-w fu">Pricing</span>
+    <div class="rw"><h2 class="ttl ttl-w rv">料金・<em>納期</em></h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="price-box fu d2">
+    <div class="price-range">¥20,000 〜</div>
+    <p class="price-note">税込 / 自動化する業務の複雑さ・工数により変動 / お見積り無料</p>
+    <div class="price-includes">
+      <div class="price-item">要件ヒアリング・業務分析</div>
+      <div class="price-item">Python / VBA スクリプト開発</div>
+      <div class="price-item">テスト・デバッグ込み</div>
+      <div class="price-item">定期実行設定（オプション）</div>
+      <div class="price-item">操作マニュアル付き</div>
+      <div class="price-item">納品後1週間の無償サポート</div>
+    </div>
+    <div class="price-cta-wrap">
+      <a href="#contact" class="btn-g"><i class="fa-solid fa-paper-plane" style="font-size:.7rem;"></i> 無料見積りを依頼</a>
+      <span class="price-free">見積り・相談は完全無料</span>
+    </div>
+  </div>
+</section>
+
+<section class="sv-proc">
+  <div class="sec-hd">
+    <span class="lbl fu">Process</span>
+    <div class="rw"><h2 class="ttl rv">ご依頼の<em>流れ</em></h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="proc4">
+    <div class="p4-step fu d1"><div class="p4-c">01</div><div class="p4-nm">業務ヒアリング</div><p class="p4-tx">現在の作業フロー・ファイル・ツールを確認。自動化可能な範囲を特定します。</p></div>
+    <div class="p4-step fu d2"><div class="p4-c">02</div><div class="p4-nm">要件定義・見積り</div><p class="p4-tx">自動化の範囲・使用技術・工数・費用を提示。ご確認後に着手します。</p></div>
+    <div class="p4-step fu d3"><div class="p4-c">03</div><div class="p4-nm">開発・テスト</div><p class="p4-tx">実際のデータで動作確認しながら開発。エラー処理・ログ出力も実装します。</p></div>
+    <div class="p4-step fu d4"><div class="p4-c">04</div><div class="p4-nm">納品・導入サポート</div><p class="p4-tx">スクリプト・マニュアルを納品。導入時のセットアップもサポートします。</p></div>
+  </div>
+</section>
+
+<section class="sv-faq">
+  <div class="sec-hd">
+    <span class="lbl fu">FAQ</span>
+    <div class="rw"><h2 class="ttl rv">よくある<em>ご質問</em></h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item fu d1">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-mark">Q</span>
+        <span class="faq-q-txt">どんな業務でも自動化できますか？</span>
+        <span class="faq-arrow"><i class="fa-solid fa-chevron-down"></i></span>
+      </div>
+      <div class="faq-a"><p class="faq-a-in">「手順が決まっており、毎回同じパターンで行う作業」であれば基本的に自動化できます。まずは現在の業務内容をご共有ください。ヒアリング後に自動化可能な範囲をご提案します。</p></div>
+    </div>
+    <div class="faq-item fu d2">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-mark">Q</span>
+        <span class="faq-q-txt">社内ツール（kintone・Notionなど）との連携はできますか？</span>
+        <span class="faq-arrow"><i class="fa-solid fa-chevron-down"></i></span>
+      </div>
+      <div class="faq-a"><p class="faq-a-in">はい、API提供があるツールであれば連携可能です。kintone・Slack・Google Workspace・Notion・freee・Zapierなど多数の実績があります。まずはご利用中のツールをお知らせください。</p></div>
+    </div>
+    <div class="faq-item fu d3">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-mark">Q</span>
+        <span class="faq-q-txt">納品後に自社でカスタマイズできますか？</span>
+        <span class="faq-arrow"><i class="fa-solid fa-chevron-down"></i></span>
+      </div>
+      <div class="faq-a"><p class="faq-a-in">はい、ソースコードをすべて納品しますのでご自由に改変いただけます。コメントを丁寧に記載し、マニュアルも付属します。追加機能の開発は別途ご相談ください。</p></div>
+    </div>
+    <div class="faq-item fu d4">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-mark">Q</span>
+        <span class="faq-q-txt">Pythonの知識がなくても使えますか？</span>
+        <span class="faq-arrow"><i class="fa-solid fa-chevron-down"></i></span>
+      </div>
+      <div class="faq-a"><p class="faq-a-in">はい。「ダブルクリックで実行」するだけで動く形での納品も可能です。GUIをつけてパラメータを変更できるようにする対応もできます。技術知識なしで運用できるよう設計します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sv-cta" id="contact">
+  <div class="cta-orb"></div>
+  <span class="lbl lbl-w fu" style="justify-content:center;margin-bottom:16px;">Contact</span>
+  <h2 class="ct-ttl fu d1">まずは、無料でご相談を。</h2>
+  <div class="ln ln-c fu d2"></div>
+  <p class="ct-sub fu d2">自動化したい業務の概要を教えていただくだけで構いません。<br>ヒアリング・見積りは完全無料です。</p>
+  <div class="ct-links fu d3">
+    <a href="https://lin.ee/01ZHw9z" target="_blank" rel="noopener noreferrer" class="c-btn c-btn-line"><i class="fa-brands fa-line"></i>LINEで相談（最速対応）</a>
+  </div>
+  <p class="ct-note fu d4">※ 見積り・相談は無料です。LINEが最も迅速に対応します。</p>
+</section>
+
+<footer class="sv-footer">
+  <div class="sv-footer-inner">
+    <a href="../index.html" class="ft-logo">
+      <span class="logo-bg"><img src="../Wflow/素材/logo/透過.png" alt="W-Flow" style="height:22px;"></span>
+      <span class="ft-logo-t">W-Flow</span>
+    </a>
+    <div class="sv-footer-links">
+      <a href="../index.html">ホームへ戻る</a>
+      <a href="./scraping.html">スクレイピング</a>
+      <a href="./sop.html">SOP作成</a>
+      <a href="./document.html">資料制作</a>
+      <a href="./web.html">Web制作</a>
+      <a href="./consulting.html">コンサルティング</a>
+    </div>
+  </div>
+  <p class="ft-copy">&copy; 2026 W-Flow. All rights reserved. &nbsp;&vert;&nbsp; <a href="../privacy.html" style="color:inherit;opacity:.55;transition:opacity .3s;">プライバシーポリシー</a> &nbsp;&vert;&nbsp; <a href="../tokusho.html" style="color:inherit;opacity:.55;transition:opacity .3s;">特定商取引法に基づく表記</a> &nbsp;&vert;&nbsp; <a href="../terms.html" style="color:inherit;opacity:.55;transition:opacity .3s;">利用規約</a></p>
+</footer>
+
+<!-- Cookie Consent Banner -->
+<div id="cookie-banner">
+  <p>当サイトでは、アクセス解析のためにCookieを使用しています。詳しくは<a href="../privacy.html">プライバシーポリシー</a>をご覧ください。</p>
+  <div class="cb-btns">
+    <button class="cb-btn cb-reject" onclick="handleCookie('rejected')">拒否</button>
+    <button class="cb-btn cb-accept" onclick="handleCookie('accepted')">同意する</button>
+  </div>
+</div>
+
+<script src="./script.js"></script>
+</body>
+</html>

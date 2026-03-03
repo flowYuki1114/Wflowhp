@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src https://www.google-analytics.com; img-src 'self' data:;">
+  <title>Webサイト・LP制作 | W-Flow</title>
+  <meta name="description" content="コーポレートサイト・LP・採用サイトをBootstrap対応のレスポンシブで制作。デザインカンプ対応。¥30,000〜・納期7〜14日。">
+  <link rel="icon" href="../Wflow/素材/logo/透過.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="./style.css">
+  <!-- OGP -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Webサイト・LP制作 | W-Flow">
+  <meta property="og:description" content="コーポレートサイト・LP・採用サイトをBootstrap対応のレスポンシブで制作。デザインカンプ対応。¥30,000〜・納期7〜14日。">
+  <meta property="og:url" content="https://w-flow.jp/services/web.html">
+  <meta property="og:image" content="https://w-flow.jp/ogp.png">
+  <meta property="og:site_name" content="W-Flow">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://w-flow.jp/ogp.png">
+  <!-- GA4 (loaded after cookie consent) -->
+  <script>
+  window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+  function loadGA(){
+    if(document.querySelector('script[src*="googletagmanager"]'))return;
+    var s=document.createElement('script');s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+    document.head.appendChild(s);
+    gtag('js',new Date());gtag('config','G-XXXXXXXXXX');
+  }
+  if(localStorage.getItem('wflow_cookie_consent')==='accepted'){loadGA();}
+  </script>
+</head>
+<body>
+
+<div class="cur" id="curDot"></div>
+<div class="cur-r" id="curRing"></div>
+<div id="prog"></div>
+
+<div id="float-line">
+  <a href="https://lin.ee/01ZHw9z" target="_blank" rel="noopener noreferrer" class="fl-btn">
+    <i class="fa-brands fa-line"></i>
+    <span class="fl-badge">最速対応</span>
+  </a>
+  <span class="fl-label">LINEで相談</span>
+</div>
+
+<header id="hdr">
+  <a href="../index.html" class="hd-logo">
+    <span class="logo-bg"><img src="../Wflow/素材/logo/透過.png" alt="W-Flow" style="height:28px;"></span>
+    <span class="logo-t">W<em>-Flow</em></span>
+  </a>
+  <div class="hd-right">
+    <a href="../index.html#services" class="hd-back"><i class="fa-solid fa-chevron-left"></i> サービス一覧</a>
+    <a href="#contact" class="hd-cta"><i class="fa-solid fa-comment-dots" style="font-size:.7rem;"></i> 無料相談</a>
+  </div>
+</header>
+
+<div class="sv-hero">
+  <div class="sv-hero-bg"></div>
+  <div class="sv-hero-ov"></div>
+  <div class="sv-wm">W</div>
+  <div class="sv-con">
+    <div class="sv-breadcrumb">
+      <a href="../index.html">Home</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <a href="../index.html#services">Services</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <span>Web</span>
+    </div>
+    <p class="sv-cat">Service 05 — Web / LP</p>
+    <i class="sv-icon-big fa-solid fa-laptop-code"></i>
+    <h1 class="sv-h1">集客につながる<br><em>Webサイト</em>を作ります。</h1>
+    <p class="sv-sub">「とりあえず作った」サイトでは集客は生まれません。目的・ターゲット・CVポイントを設計した上で、見た目も速度もレスポンシブも品質基準をクリアしたサイトを構築します。</p>
+    <div class="sv-btns">
+      <a href="#contact" class="btn-g"><i class="fa-brands fa-line" style="font-size:.8rem;"></i> LINEで無料相談</a>
+      <a href="#price" class="btn-ghost">料金を見る <i class="fa-solid fa-chevron-down" style="font-size:.6rem;"></i></a>
+    </div>
+    <div class="sv-stats">
+      <div class="sv-stat">
+        <div class="sv-stat-v">¥30,000<span style="font-size:1rem;">〜</span></div>
+        <div class="sv-stat-l">LP スタート価格</div>
+      </div>
+      <div class="sv-stat">
+        <div class="sv-stat-v">7〜14<span style="font-size:1rem;">日</span></div>
+        <div class="sv-stat-l">標準納期</div>
+      </div>
+      <div class="sv-stat">
+        <div class="sv-stat-v">100<span style="font-size:1rem;">%</span></div>
+        <div class="sv-stat-l">レスポンシブ対応</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="sv-prob">
+  <div class="sec-hd">
+    <span class="lbl lbl-w fu">Pain Point</span>
+    <div class="rw"><h2 class="ttl ttl-w rv">こんな<em>課題</em>ありませんか？</h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="prob-grid fu d2">
+    <div class="prob-card">
+      <div class="prob-icon"><i class="fa-solid fa-ban"></i></div>
+      <div>
+        <p class="prob-q">Webサイトがなく<br>信頼感・集客に課題</p>
+        <p class="prob-a">名刺交換しても検索で何も出てこない。今の時代、Webサイトは「存在証明」です。</p>
+      </div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+      <div>
+        <p class="prob-q">スマホで崩れる・<br>表示が遅い</p>
+        <p class="prob-a">スマホ経由の訪問が過半数の今、レスポンシブ対応は必須。離脱率に直結します。</p>
+      </div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon"><i class="fa-solid fa-hand-pointer"></i></div>
+      <div>
+        <p class="prob-q">問い合わせが<br>全然来ない</p>
+        <p class="prob-a">サイトがあっても問い合わせにつながらない。CV設計・導線・CTAを最適化します。</p>
+      </div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+      <div>
+        <p class="prob-q">サイトが古くて<br>ブランドイメージが悪い</p>
+        <p class="prob-a">10年前に作ったまま。古いデザインはそれだけで信頼を下げます。刷新のタイミングです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sv-sol">
+  <div class="sec-hd">
+    <span class="lbl fu">Deliverables</span>
+    <div class="rw"><h2 class="ttl rv">W-Flowが<em>提供するもの</em></h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="sol-grid">
+    <div class="sol-card fu d1">
+      <div class="sol-n">01</div>
+      <div class="sol-icon"><i class="fa-solid fa-code"></i></div>
+      <div class="sol-ttl">HTML/CSS/JS コーディング</div>
+      <p class="sol-tx">Bootstrap・Vanilla JS・アニメーションライブラリを組み合わせた高品質なコーディング。デザインカンプ（Figma / XD / 画像）からの実装も対応します。</p>
+    </div>
+    <div class="sol-card fu d2">
+      <div class="sol-n">02</div>
+      <div class="sol-icon"><i class="fa-solid fa-mobile-alt"></i></div>
+      <div class="sol-ttl">レスポンシブ・パフォーマンス最適化</div>
+      <p class="sol-tx">スマホ・タブレット・PCすべての画面サイズに対応。画像最適化・コード軽量化によって表示速度を確保し、Core Web Vitals の基準をクリアします。</p>
+    </div>
+    <div class="sol-card fu d3">
+      <div class="sol-n">03</div>
+      <div class="sol-icon"><i class="fa-solid fa-bullseye"></i></div>
+      <div class="sol-ttl">CV設計・フォーム・SEO基礎</div>
+      <p class="sol-tx">問い合わせ・資料請求・LINE誘導など目的に合ったCV設計。フォーム実装・OGP設定・構造化データなどSEO基礎対応も含みます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sv-cases">
+  <div class="sec-hd">
+    <span class="lbl fu">Case Studies</span>
+    <div class="rw"><h2 class="ttl rv">制作<em>実績</em></h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="cases-grid">
+    <div class="case-card fu d1">
+      <p class="case-cat">医療 / コーポレートサイト</p>
+      <h3 class="case-ttl">訪問看護施設のコーポレートサイトをゼロから制作</h3>
+      <p class="case-tx">Bootstrap・グリーン系カラーのレスポンシブサイト。サービス紹介・スタッフ紹介・採用ページ・お問い合わせフォームを実装。デザインカンプ提供から想定納期の半分以下で完成。</p>
+      <span class="case-result">想定より早く納品を完了</span>
+    </div>
+    <div class="case-card fu d2">
+      <p class="case-cat">飲食 / LP制作</p>
+      <h3 class="case-ttl">新業態オープンに向けた集客LPを制作</h3>
+      <p class="case-tx">SNS広告から流入するLP。キャッチコピー・メニュー写真・アクセス・LINEへの誘導CTAを組み込み、スマホファーストで設計。公開後、LINE友達追加率が大幅に向上。</p>
+      <span class="case-result">LINE誘導率が大幅に向上</span>
+    </div>
+    <div class="case-card fu d3">
+      <p class="case-cat">IT企業 / コーポレート</p>
+      <h3 class="case-ttl">スタートアップのコーポレートサイトをリニューアル</h3>
+      <p class="case-tx">既存の古いHTMLサイトを現代的なデザインに全面リニューアル。採用強化のためのカルチャーページ・実績ページ・ブログ機能を追加。採用応募数が改善。</p>
+      <span class="case-result">採用応募数が大幅に増加</span>
+    </div>
+    <div class="case-card fu d4">
+      <p class="case-cat">サービス業 / 採用LP</p>
+      <h3 class="case-ttl">採用強化のための独立採用サイトを構築</h3>
+      <p class="case-tx">求人票だけでなく「働く様子・社員インタビュー・福利厚生」をビジュアル重視で伝える採用LPを制作。エントリー数・応募品質が大幅に改善。</p>
+      <span class="case-result">エントリー数が大幅に増加</span>
+    </div>
+  </div>
+</section>
+
+<section class="sv-price" id="price">
+  <div class="sec-hd">
+    <span class="lbl lbl-w fu">Pricing</span>
+    <div class="rw"><h2 class="ttl ttl-w rv">料金・<em>納期</em></h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="price-box fu d2">
+    <div class="price-range">¥30,000 〜</div>
+    <p class="price-note">税込 / ページ数・機能・デザイン工数により変動 / お見積り無料</p>
+    <div class="price-includes">
+      <div class="price-item">要件ヒアリング・構成設計</div>
+      <div class="price-item">HTML/CSS/JS コーディング</div>
+      <div class="price-item">レスポンシブ（SP/Tab/PC）対応</div>
+      <div class="price-item">お問い合わせフォーム実装</div>
+      <div class="price-item">OGP・SEO基礎設定</div>
+      <div class="price-item">納品後1週間の修正・サポート</div>
+    </div>
+    <div class="price-cta-wrap">
+      <a href="#contact" class="btn-g"><i class="fa-solid fa-paper-plane" style="font-size:.7rem;"></i> 無料見積りを依頼</a>
+      <span class="price-free">見積り・相談は完全無料</span>
+    </div>
+  </div>
+</section>
+
+<section class="sv-proc">
+  <div class="sec-hd">
+    <span class="lbl fu">Process</span>
+    <div class="rw"><h2 class="ttl rv">ご依頼の<em>流れ</em></h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="proc4">
+    <div class="p4-step fu d1"><div class="p4-c">01</div><div class="p4-nm">ヒアリング</div><p class="p4-tx">目的・ターゲット・ページ構成・デザインイメージをお伺いします。</p></div>
+    <div class="p4-step fu d2"><div class="p4-c">02</div><div class="p4-nm">設計・見積り</div><p class="p4-tx">サイト構成・機能・スケジュール・費用をご提案。承認後に着手。</p></div>
+    <div class="p4-step fu d3"><div class="p4-c">03</div><div class="p4-nm">制作・確認</div><p class="p4-tx">コーディング後、プレビュー環境でご確認。修正対応を行います。</p></div>
+    <div class="p4-step fu d4"><div class="p4-c">04</div><div class="p4-nm">納品・公開</div><p class="p4-tx">ファイル一式を納品。サーバー設置・ドメイン設定のサポートも対応。</p></div>
+  </div>
+</section>
+
+<section class="sv-faq">
+  <div class="sec-hd">
+    <span class="lbl fu">FAQ</span>
+    <div class="rw"><h2 class="ttl rv">よくある<em>ご質問</em></h2></div>
+    <div class="ln ln-c fu d1"></div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item fu d1">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-mark">Q</span>
+        <span class="faq-q-txt">デザインカンプがなくても依頼できますか？</span>
+        <span class="faq-arrow"><i class="fa-solid fa-chevron-down"></i></span>
+      </div>
+      <div class="faq-a"><p class="faq-a-in">はい、デザイン方向性のヒアリングとラフ案の提案から対応できます。参考サイトをいくつかお伝えいただくだけでも進められます。デザインカンプ制作（Figma）とセットの依頼も対応可能です。</p></div>
+    </div>
+    <div class="faq-item fu d2">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-mark">Q</span>
+        <span class="faq-q-txt">WordPressなどのCMS対応はできますか？</span>
+        <span class="faq-arrow"><i class="fa-solid fa-chevron-down"></i></span>
+      </div>
+      <div class="faq-a"><p class="faq-a-in">基本はHTML/CSS/JSでの静的サイト制作ですが、WordPress・Wix・STUDIO等への対応もご相談ください。特にブログ・ニュース更新が頻繁に必要な場合にCMSを推奨します。</p></div>
+    </div>
+    <div class="faq-item fu d3">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-mark">Q</span>
+        <span class="faq-q-txt">サーバー・ドメインの準備は自分でしないといけませんか？</span>
+        <span class="faq-arrow"><i class="fa-solid fa-chevron-down"></i></span>
+      </div>
+      <div class="faq-a"><p class="faq-a-in">基本的にはお客様にご準備いただきますが、レンタルサーバー・ドメインの選定・取得・設定まで代行・サポートすることも可能です。追加でご相談ください。</p></div>
+    </div>
+    <div class="faq-item fu d4">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-mark">Q</span>
+        <span class="faq-q-txt">納品後に自分でテキストや画像を更新できますか？</span>
+        <span class="faq-arrow"><i class="fa-solid fa-chevron-down"></i></span>
+      </div>
+      <div class="faq-a"><p class="faq-a-in">静的サイトの場合、HTMLファイルを直接編集する形になります。編集方法のマニュアルをお渡しします。頻繁な更新が必要な場合はCMSへの対応をご検討ください。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sv-cta" id="contact">
+  <div class="cta-orb"></div>
+  <span class="lbl lbl-w fu" style="justify-content:center;margin-bottom:16px;">Contact</span>
+  <h2 class="ct-ttl fu d1">まずは、無料でご相談を。</h2>
+  <div class="ln ln-c fu d2"></div>
+  <p class="ct-sub fu d2">「どんなサイトが必要か相談したい」からで構いません。<br>ヒアリング・見積りは完全無料。</p>
+  <div class="ct-links fu d3">
+    <a href="https://lin.ee/01ZHw9z" target="_blank" rel="noopener noreferrer" class="c-btn c-btn-line"><i class="fa-brands fa-line"></i>LINEで相談（最速対応）</a>
+  </div>
+  <p class="ct-note fu d4">※ 見積り・相談は無料です。</p>
+</section>
+
+<footer class="sv-footer">
+  <div class="sv-footer-inner">
+    <a href="../index.html" class="ft-logo">
+      <span class="logo-bg"><img src="../Wflow/素材/logo/透過.png" alt="W-Flow" style="height:22px;"></span>
+      <span class="ft-logo-t">W-Flow</span>
+    </a>
+    <div class="sv-footer-links">
+      <a href="../index.html">ホームへ戻る</a>
+      <a href="./scraping.html">スクレイピング</a>
+      <a href="./automation.html">業務自動化</a>
+      <a href="./sop.html">SOP作成</a>
+      <a href="./document.html">資料制作</a>
+      <a href="./consulting.html">コンサルティング</a>
+    </div>
+  </div>
+  <p class="ft-copy">&copy; 2026 W-Flow. All rights reserved. &nbsp;&vert;&nbsp; <a href="../privacy.html" style="color:inherit;opacity:.55;transition:opacity .3s;">プライバシーポリシー</a> &nbsp;&vert;&nbsp; <a href="../tokusho.html" style="color:inherit;opacity:.55;transition:opacity .3s;">特定商取引法に基づく表記</a> &nbsp;&vert;&nbsp; <a href="../terms.html" style="color:inherit;opacity:.55;transition:opacity .3s;">利用規約</a></p>
+</footer>
+
+<!-- Cookie Consent Banner -->
+<div id="cookie-banner">
+  <p>当サイトでは、アクセス解析のためにCookieを使用しています。詳しくは<a href="../privacy.html">プライバシーポリシー</a>をご覧ください。</p>
+  <div class="cb-btns">
+    <button class="cb-btn cb-reject" onclick="handleCookie('rejected')">拒否</button>
+    <button class="cb-btn cb-accept" onclick="handleCookie('accepted')">同意する</button>
+  </div>
+</div>
+
+<script src="./script.js"></script>
+</body>
+</html>

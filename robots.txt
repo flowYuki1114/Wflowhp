@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /Wflow/
+
+Sitemap: https://w-flow.jp/sitemap.xml

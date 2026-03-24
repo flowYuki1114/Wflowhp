@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>建材仕入先 自動比較表</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Roboto', 'Noto Sans JP', sans-serif; background: #f8f9fa; overflow: hidden; }
+
+  .toolbar {
+    height: 64px; background: #fff; display: flex; align-items: center;
+    padding: 0 16px; border-bottom: 1px solid #dadce0;
+  }
+  .toolbar-icon {
+    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; cursor: pointer;
+  }
+  .toolbar-icon:hover { background: #f1f3f4; }
+  .sheets-icon { width: 28px; height: 28px; background: #0f9d58; border-radius: 3px; margin-right: 12px;
+    display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 14px; }
+  .toolbar-title-area { flex: 1; }
+  .toolbar-title { font-size: 18px; color: #202124; font-weight: 400; }
+  .toolbar-subtitle { font-size: 11px; color: #5f6368; margin-top: 1px; }
+  .toolbar-share {
+    background: #1a73e8; color: #fff; border: none; border-radius: 20px;
+    padding: 8px 20px; font-size: 14px; font-weight: 500; cursor: pointer;
+    margin-left: 16px;
+  }
+  .toolbar-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #c8a96e; margin-left: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 500; font-size: 14px;
+  }
+
+  .menu-bar {
+    height: 28px; background: #fff; display: flex; align-items: center;
+    padding: 0 8px; gap: 2px; border-bottom: 1px solid #dadce0; font-size: 13px;
+  }
+  .menu-item { color: #444; padding: 3px 8px; border-radius: 4px; cursor: pointer; }
+  .menu-item:hover { background: #f1f3f4; }
+
+  .icon-bar {
+    height: 36px; background: #edf2fa; display: flex; align-items: center;
+    padding: 0 8px; gap: 4px; border-bottom: 1px solid #dadce0;
+  }
+  .icon-btn {
+    padding: 2px 6px; font-size: 12px; color: #444; cursor: pointer;
+    border-radius: 3px;
+  }
+  .icon-btn:hover { background: #d3dbe8; }
+  .formula-bar {
+    flex: 1; margin-left: 8px; background: #fff; border: 1px solid #dadce0;
+    border-radius: 3px; padding: 2px 8px; font-size: 12px; color: #202124;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cell-ref { color: #1a73e8; font-weight: 500; border-right: 1px solid #dadce0; padding-right: 8px; }
+
+  .sheet-area { background: #fff; overflow: hidden; }
+
+  table {
+    border-collapse: collapse; width: 100%;
+    font-size: 13px; color: #202124;
+  }
+  .row-header {
+    background: #f8f9fa; color: #5f6368; text-align: center;
+    width: 40px; min-width: 40px; border: 1px solid #e2e2e2;
+    font-size: 11px; padding: 4px;
+  }
+  .col-header {
+    background: #f8f9fa; color: #5f6368; text-align: center;
+    border: 1px solid #e2e2e2; padding: 4px 8px;
+    font-size: 11px; font-weight: 500; min-width: 120px;
+  }
+  td {
+    border: 1px solid #e2e2e2; padding: 5px 10px; white-space: nowrap;
+  }
+
+  .header-row td {
+    background: #1a73e8; color: #fff; font-weight: 500;
+    text-align: center; font-size: 12px; padding: 8px 10px;
+  }
+  .header-row td:first-child { background: #f8f9fa; color: #5f6368; }
+
+  .sub-header td {
+    background: #e8f0fe; color: #1a73e8; font-weight: 500;
+    font-size: 12px; padding: 6px 10px;
+  }
+  .sub-header td:first-child { background: #f8f9fa; }
+
+  .data-row td { font-size: 13px; padding: 7px 10px; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .best { background: #e6f4ea; color: #137333; font-weight: 500; }
+  .worst { background: #fce8e6; color: #c5221f; }
+  .neutral { background: #fff; }
+  .formula { color: #5f6368; font-style: italic; font-size: 11px; }
+
+  .total-row td {
+    background: #fef7e0; font-weight: 500; border-top: 2px solid #f9ab00;
+    padding: 8px 10px;
+  }
+
+  .tabs {
+    height: 28px; background: #f8f9fa; display: flex; align-items: center;
+    padding: 0 40px; border-top: 1px solid #dadce0; gap: 0;
+  }
+  .tab {
+    padding: 4px 20px; font-size: 12px; color: #5f6368;
+    border: 1px solid #dadce0; border-bottom: none;
+    background: #f0f0f0; border-radius: 4px 4px 0 0; cursor: pointer;
+    margin-right: -1px;
+  }
+  .tab.active { background: #fff; color: #202124; font-weight: 500; border-bottom: 1px solid #fff; }
+
+  .update-badge {
+    position: fixed; bottom: 40px; right: 16px;
+    background: #188038; color: #fff; font-size: 12px;
+    padding: 8px 16px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="sheets-icon">S</div>
+  <div class="toolbar-title-area">
+    <div class="toolbar-title">建材仕入先 自動比較表（毎朝8:00自動更新）</div>
+    <div class="toolbar-subtitle">最終更新: 2026/03/25 08:00 — GAS自動実行</div>
+  </div>
+  <button class="toolbar-share">共有</button>
+  <div class="toolbar-avatar">Y</div>
+</div>
+
+<div class="menu-bar">
+  <span class="menu-item">ファイル</span>
+  <span class="menu-item">編集</span>
+  <span class="menu-item">表示</span>
+  <span class="menu-item">挿入</span>
+  <span class="menu-item">表示形式</span>
+  <span class="menu-item">データ</span>
+  <span class="menu-item">ツール</span>
+  <span class="menu-item">拡張機能</span>
+  <span class="menu-item">ヘルプ</span>
+</div>
+
+<div class="icon-bar">
+  <span class="icon-btn">↩</span>
+  <span class="icon-btn">↪</span>
+  <span class="icon-btn">🖨</span>
+  <span class="icon-btn" style="margin-left:8px;">¥</span>
+  <span class="icon-btn">%</span>
+  <div class="formula-bar">
+    <span class="cell-ref">G4</span>
+    <span>=MIN(C4,D4,E4)</span>
+  </div>
+</div>
+
+<div class="sheet-area">
+  <table>
+    <tr>
+      <th class="row-header"></th>
+      <th class="col-header" style="min-width:50px;">A</th>
+      <th class="col-header" style="min-width:200px;">B</th>
+      <th class="col-header" style="min-width:110px;">C</th>
+      <th class="col-header" style="min-width:110px;">D</th>
+      <th class="col-header" style="min-width:110px;">E</th>
+      <th class="col-header" style="min-width:80px;">F</th>
+      <th class="col-header" style="min-width:110px;">G</th>
+      <th class="col-header" style="min-width:90px;">H</th>
+    </tr>
+    <tr class="header-row">
+      <td class="row-header">1</td>
+      <td style="background:#f8f9fa;color:#5f6368;">No.</td>
+      <td>品目</td>
+      <td>A社（山田建材）</td>
+      <td>B社（鈴木木材）</td>
+      <td>C社（丸井資材）</td>
+      <td>単位</td>
+      <td>最安値</td>
+      <td>差額</td>
+    </tr>
+    <tr class="sub-header">
+      <td class="row-header">2</td>
+      <td></td>
+      <td colspan="7" style="color:#1a73e8;">▼ 木材・板材</td>
+    </tr>
+    <tr class="data-row">
+      <td class="row-header">3</td>
+      <td>1</td>
+      <td>構造用合板 12mm</td>
+      <td class="num">¥1,850</td>
+      <td class="num best">¥1,680</td>
+      <td class="num">¥1,920</td>
+      <td>枚</td>
+      <td class="num best">¥1,680</td>
+      <td class="num" style="color:#137333;">▼ ¥240</td>
+    </tr>
+    <tr class="data-row">
+      <td class="row-header">4</td>
+      <td>2</td>
+      <td>2×4 SPF材 6ft</td>
+      <td class="num best">¥498</td>
+      <td class="num">¥520</td>
+      <td class="num">¥548</td>
+      <td>本</td>
+      <td class="num best">¥498</td>
+      <td class="num" style="color:#137333;">▼ ¥50</td>
+    </tr>
+    <tr class="data-row">
+      <td class="row-header">5</td>
+      <td>3</td>
+      <td>フロア材 オーク無垢</td>
+      <td class="num">¥4,200</td>
+      <td class="num">¥4,500</td>
+      <td class="num best">¥3,980</td>
+      <td>㎡</td>
+      <td class="num best">¥3,980</td>
+      <td class="num" style="color:#137333;">▼ ¥520</td>
+    </tr>
+    <tr class="sub-header">
+      <td class="row-header">6</td>
+      <td></td>
+      <td colspan="7" style="color:#1a73e8;">▼ セメント・骨材</td>
+    </tr>
+    <tr class="data-row">
+      <td class="row-header">7</td>
+      <td>4</td>
+      <td>ポルトランドセメント 25kg</td>
+      <td class="num">¥580</td>
+      <td class="num best">¥540</td>
+      <td class="num worst">¥620</td>
+      <td>袋</td>
+      <td class="num best">¥540</td>
+      <td class="num" style="color:#137333;">▼ ¥80</td>
+    </tr>
+    <tr class="data-row">
+      <td class="row-header">8</td>
+      <td>5</td>
+      <td>砕石 C-40</td>
+      <td class="num best">¥3,200</td>
+      <td class="num">¥3,400</td>
+      <td class="num">¥3,350</td>
+      <td>t</td>
+      <td class="num best">¥3,200</td>
+      <td class="num" style="color:#137333;">▼ ¥200</td>
+    </tr>
+    <tr class="sub-header">
+      <td class="row-header">9</td>
+      <td></td>
+      <td colspan="7" style="color:#1a73e8;">▼ 金物・副資材</td>
+    </tr>
+    <tr class="data-row">
+      <td class="row-header">10</td>
+      <td>6</td>
+      <td>ステンレスビス 75mm 箱</td>
+      <td class="num">¥1,280</td>
+      <td class="num">¥1,350</td>
+      <td class="num best">¥1,180</td>
+      <td>箱</td>
+      <td class="num best">¥1,180</td>
+      <td class="num" style="color:#137333;">▼ ¥170</td>
+    </tr>
+    <tr class="data-row">
+      <td class="row-header">11</td>
+      <td>7</td>
+      <td>断熱材 グラスウール 16K</td>
+      <td class="num best">¥850</td>
+      <td class="num worst">¥980</td>
+      <td class="num">¥890</td>
+      <td>坪</td>
+      <td class="num best">¥850</td>
+      <td class="num" style="color:#137333;">▼ ¥130</td>
+    </tr>
+    <tr class="data-row">
+      <td class="row-header">12</td>
+      <td>8</td>
+      <td>防水シート タイベック</td>
+      <td class="num">¥12,800</td>
+      <td class="num best">¥11,500</td>
+      <td class="num">¥13,200</td>
+      <td>巻</td>
+      <td class="num best">¥11,500</td>
+      <td class="num" style="color:#137333;">▼ ¥1,700</td>
+    </tr>
+    <tr class="total-row">
+      <td class="row-header">13</td>
+      <td></td>
+      <td style="font-weight:700;">合計（全品目・各1単位）</td>
+      <td class="num">¥25,258</td>
+      <td class="num">¥24,470</td>
+      <td class="num">¥25,688</td>
+      <td></td>
+      <td class="num" style="color:#137333;font-weight:700;">¥23,428</td>
+      <td class="num" style="color:#137333;font-weight:700;">▼ ¥2,260</td>
+    </tr>
+    <tr class="data-row">
+      <td class="row-header">14</td>
+      <td></td>
+      <td class="formula" colspan="7">※ 毎朝 08:00 に各社Webサイトから自動取得（GAS + Python）　最安値はセルごとに MIN() で自動判定</td>
+    </tr>
+  </table>
+</div>
+
+<div class="tabs">
+  <div class="tab active">価格比較（最新）</div>
+  <div class="tab">価格推移グラフ</div>
+  <div class="tab">仕入先マスタ</div>
+  <div class="tab">取得ログ</div>
+</div>
+
+<div class="update-badge">✓ 本日 08:00 自動更新済み</div>
+
+</body>
+</html>

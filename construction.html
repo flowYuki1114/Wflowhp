@@ -186,6 +186,63 @@
   .pain-text { font-size: 0.88rem; color: var(--text); line-height: 1.6; }
   .pain-text strong { color: var(--white); font-weight: 500; display: block; margin-bottom: 0.2rem; }
 
+  .hero-right { display: flex; flex-direction: column; gap: 1.25rem; }
+  .hero-screen-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  }
+  .hero-screen-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: bottom;
+  }
+  .hero-screen-caption {
+    font-size: 0.72rem;
+    color: var(--muted);
+    padding: 0.65rem 1rem;
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+  .hero-screen-caption strong { color: var(--accent); font-weight: 500; }
+
+  /* SHOWCASE (実装イメージ) */
+  .showcase { background: var(--black); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+  .showcase-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .showcase-card:hover { border-color: rgba(200,169,110,0.35); }
+  .showcase-card img { width: 100%; display: block; vertical-align: bottom; }
+  .showcase-cap {
+    padding: 1rem 1.2rem 1.2rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .showcase-cap .cap-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
   /* SECTION */
   section { padding: 6rem 2.5rem; }
   .section-inner { max-width: 1100px; margin: 0 auto; }
@@ -369,6 +426,7 @@
     section { padding: 4rem 1.5rem; }
     .flow-steps { grid-template-columns: 1fr 1fr; }
     .flow-step { border-right: 1px solid var(--border); }
+    .showcase-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -396,34 +454,40 @@
         <a href="#solutions" class="btn-secondary">解決できること</a>
       </div>
     </div>
-    <div class="pain-visual fade-in">
-      <div class="pain-visual-title">こんな悩み、ありませんか？</div>
-      <div class="pain-item">
-        <div class="pain-icon">📋</div>
-        <div class="pain-text">
-          <strong>見積もりに時間がかかりすぎる</strong>
-          毎回Excelを開いて手打ち。ミスも多い。
-        </div>
+    <div class="hero-right fade-in">
+      <div class="hero-screen-wrap">
+        <img src="assets/hero-construction.png" width="800" height="500" alt="Google Apps Script で建設見積もりを自動化するコード例（画面イメージ）" loading="eager">
+        <p class="hero-screen-caption"><strong>実装イメージ</strong> GAS で見積テンプレ・PDF・メール送信までを一気通貫で組みます。</p>
       </div>
-      <div class="pain-item">
-        <div class="pain-icon">📞</div>
-        <div class="pain-text">
-          <strong>顧客管理がバラバラ</strong>
-          メモ・LINE・電話で情報が散らばっている。
+      <div class="pain-visual">
+        <div class="pain-visual-title">こんな悩み、ありませんか？</div>
+        <div class="pain-item">
+          <div class="pain-icon">📋</div>
+          <div class="pain-text">
+            <strong>見積もりに時間がかかりすぎる</strong>
+            毎回Excelを開いて手打ち。ミスも多い。
+          </div>
         </div>
-      </div>
-      <div class="pain-item">
-        <div class="pain-icon">🏗️</div>
-        <div class="pain-text">
-          <strong>現場の進捗が把握できない</strong>
-          社長だけが全部を知っている状態。
+        <div class="pain-item">
+          <div class="pain-icon">📞</div>
+          <div class="pain-text">
+            <strong>顧客管理がバラバラ</strong>
+            メモ・LINE・電話で情報が散らばっている。
+          </div>
         </div>
-      </div>
-      <div class="pain-item">
-        <div class="pain-icon">📊</div>
-        <div class="pain-text">
-          <strong>売上・粗利の計算が月末だけ</strong>
-          リアルタイムで数字が見えない。
+        <div class="pain-item">
+          <div class="pain-icon">🏗️</div>
+          <div class="pain-text">
+            <strong>現場の進捗が把握できない</strong>
+            社長だけが全部を知っている状態。
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">📊</div>
+          <div class="pain-text">
+            <strong>売上・粗利の計算が月末だけ</strong>
+            リアルタイムで数字が見えない。
+          </div>
         </div>
       </div>
     </div>
@@ -467,6 +531,31 @@
         <p>月末にならないと数字がわからない。案件ごとの利益率も感覚頼り。</p>
         <div class="problem-arrow">→ リアルタイムダッシュボード化</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE: スプレッドシート・ダッシュボード -->
+<section class="showcase">
+  <div class="section-inner">
+    <div class="section-label">Proof</div>
+    <h2 class="section-title">数字と仕組みが、<br><em>そのまま見える。</em></h2>
+    <p class="section-desc">ストック写真ではなく、スプレッドシートとダッシュボードで「どう楽になるか」を具体的にイメージできます。</p>
+    <div class="showcase-grid">
+      <figure class="showcase-card fade-in">
+        <img src="assets/scene-worker.png" width="900" height="520" alt="建材仕入先の価格を複数社で比較するスプレッドシート（画面イメージ）" loading="lazy">
+        <figcaption class="showcase-cap">
+          <span class="cap-label">Price compare</span>
+          複数仕入先の単価を一覧化し、最安値や差額を自動で出す表。毎朝の更新や GAS 連携も設計できます。
+        </figcaption>
+      </figure>
+      <figure class="showcase-card fade-in">
+        <img src="assets/scene-manager.png" width="900" height="520" alt="売上・粗利・案件進捗を可視化するダッシュボード（画面イメージ）" loading="lazy">
+        <figcaption class="showcase-cap">
+          <span class="cap-label">Dashboard</span>
+          売上・粗利・進行案件・粗利率ランキングを1画面に。月末待ちの経営数字を、日々の判断に使える形へ。
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>

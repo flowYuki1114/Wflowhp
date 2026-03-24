@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>売上・粗利ダッシュボード</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+    background: #f0f2f5; overflow: hidden;
+  }
+
+  .toolbar {
+    height: 56px; background: #fff; display: flex; align-items: center;
+    padding: 0 20px; border-bottom: 1px solid #dadce0; gap: 12px;
+  }
+  .sheets-icon {
+    width: 32px; height: 32px; background: #0f9d58; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 700; font-size: 16px;
+  }
+  .toolbar-title { font-size: 16px; color: #202124; font-weight: 400; flex: 1; }
+  .toolbar-sub { font-size: 11px; color: #5f6368; }
+  .live-badge {
+    background: #e8f5e9; color: #2e7d32; font-size: 11px; font-weight: 500;
+    padding: 4px 12px; border-radius: 12px; border: 1px solid #c8e6c9;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .live-dot {
+    width: 7px; height: 7px; background: #2e7d32; border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .toolbar-avatar {
+    width: 32px; height: 32px; border-radius: 50%; background: #c8a96e;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 500; font-size: 14px; margin-left: 8px;
+  }
+
+  .dashboard {
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .kpi-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  }
+  .kpi-card {
+    background: #fff; border-radius: 8px; padding: 20px 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    position: relative; overflow: hidden;
+  }
+  .kpi-card::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .kpi-card.blue::after { background: #1a73e8; }
+  .kpi-card.green::after { background: #0f9d58; }
+  .kpi-card.orange::after { background: #f9ab00; }
+  .kpi-card.red::after { background: #ea4335; }
+  .kpi-label { font-size: 12px; color: #5f6368; font-weight: 500; margin-bottom: 8px; letter-spacing: 0.3px; }
+  .kpi-value { font-size: 28px; font-weight: 700; color: #202124; }
+  .kpi-value .unit { font-size: 14px; font-weight: 400; color: #5f6368; margin-left: 2px; }
+  .kpi-change { font-size: 11px; margin-top: 6px; font-weight: 500; }
+  .kpi-change.up { color: #0f9d58; }
+  .kpi-change.down { color: #ea4335; }
+
+  .content-row {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 16px;
+  }
+
+  .chart-card {
+    background: #fff; border-radius: 8px; padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .chart-title {
+    font-size: 14px; font-weight: 500; color: #202124; margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .chart-period { font-size: 11px; color: #5f6368; background: #f1f3f4; padding: 3px 10px; border-radius: 4px; }
+
+  .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 180px; padding-top: 8px; }
+  .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .bar-pair { display: flex; gap: 3px; align-items: flex-end; height: 150px; width: 100%; justify-content: center; }
+  .bar {
+    width: 18px; border-radius: 3px 3px 0 0; transition: height 0.3s;
+    position: relative;
+  }
+  .bar.revenue { background: #1a73e8; }
+  .bar.profit { background: #0f9d58; }
+  .bar-label { font-size: 10px; color: #5f6368; text-align: center; }
+  .bar-val {
+    position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+    font-size: 9px; color: #5f6368; white-space: nowrap;
+  }
+
+  .chart-legend {
+    display: flex; gap: 16px; margin-top: 12px; justify-content: center;
+  }
+  .legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #5f6368; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+  .legend-dot.rev { background: #1a73e8; }
+  .legend-dot.prof { background: #0f9d58; }
+
+  .gauge-card {
+    background: #fff; border-radius: 8px; padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .gauge-title { font-size: 14px; font-weight: 500; color: #202124; margin-bottom: 16px; }
+  .gauge-svg { width: 160px; height: 100px; }
+  .gauge-value { font-size: 36px; font-weight: 700; color: #0f9d58; margin-top: 4px; }
+  .gauge-target { font-size: 11px; color: #5f6368; margin-top: 4px; }
+
+  .bottom-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+
+  .project-card {
+    background: #fff; border-radius: 8px; padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .project-title {
+    font-size: 14px; font-weight: 500; color: #202124; margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .project-count { font-size: 11px; color: #1a73e8; background: #e8f0fe; padding: 2px 8px; border-radius: 10px; }
+
+  .project-item {
+    display: grid; grid-template-columns: 2fr 1fr 100px 60px;
+    align-items: center; padding: 10px 0;
+    border-bottom: 1px solid #f1f3f4; font-size: 12px; gap: 8px;
+  }
+  .project-item:last-child { border-bottom: none; }
+  .project-name { color: #202124; font-weight: 500; }
+  .project-client { color: #5f6368; font-size: 11px; }
+  .project-amount { color: #202124; text-align: right; font-variant-numeric: tabular-nums; }
+  .progress-bar {
+    height: 6px; background: #f1f3f4; border-radius: 3px; overflow: hidden;
+  }
+  .progress-fill { height: 100%; border-radius: 3px; }
+  .progress-fill.high { background: #0f9d58; }
+  .progress-fill.mid { background: #f9ab00; }
+  .progress-fill.low { background: #1a73e8; }
+  .progress-label { font-size: 10px; color: #5f6368; text-align: right; }
+
+  .ranking-card {
+    background: #fff; border-radius: 8px; padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .ranking-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid #f1f3f4;
+  }
+  .ranking-item:last-child { border-bottom: none; }
+  .rank-num {
+    width: 24px; height: 24px; border-radius: 50%; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .rank-1 { background: #fef7e0; color: #e37400; }
+  .rank-2 { background: #f1f3f4; color: #5f6368; }
+  .rank-3 { background: #fce8e6; color: #c5221f; }
+  .rank-info { flex: 1; }
+  .rank-name { font-size: 12px; font-weight: 500; color: #202124; }
+  .rank-detail { font-size: 10px; color: #5f6368; }
+  .rank-value { font-size: 13px; font-weight: 700; color: #0f9d58; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="sheets-icon">S</div>
+  <div>
+    <div class="toolbar-title">売上・粗利ダッシュボード — 2026年度</div>
+    <div class="toolbar-sub">建設・リフォーム案件 管理シート</div>
+  </div>
+  <div class="live-badge"><div class="live-dot"></div>リアルタイム更新</div>
+  <div class="toolbar-avatar">Y</div>
+</div>
+
+<div class="dashboard">
+  <div class="kpi-row">
+    <div class="kpi-card blue">
+      <div class="kpi-label">今月の売上</div>
+      <div class="kpi-value">1,847<span class="unit">万円</span></div>
+      <div class="kpi-change up">▲ 12.3% 前月比</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">粗利益</div>
+      <div class="kpi-value">512<span class="unit">万円</span></div>
+      <div class="kpi-change up">▲ 8.7% 前月比</div>
+    </div>
+    <div class="kpi-card orange">
+      <div class="kpi-label">進行中の案件</div>
+      <div class="kpi-value">7<span class="unit">件</span></div>
+      <div class="kpi-change up">▲ 2件 先月比</div>
+    </div>
+    <div class="kpi-card red">
+      <div class="kpi-label">未回収金額</div>
+      <div class="kpi-value">238<span class="unit">万円</span></div>
+      <div class="kpi-change down">▼ 15.2% 改善</div>
+    </div>
+  </div>
+
+  <div class="content-row">
+    <div class="chart-card">
+      <div class="chart-title">
+        月別 売上 / 粗利推移
+        <span class="chart-period">2025年10月 〜 2026年3月</span>
+      </div>
+      <div class="bar-chart">
+        <div class="bar-group">
+          <div class="bar-pair">
+            <div class="bar revenue" style="height:65%;"><span class="bar-val">1,280</span></div>
+            <div class="bar profit" style="height:28%;"></div>
+          </div>
+          <div class="bar-label">10月</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-pair">
+            <div class="bar revenue" style="height:58%;"><span class="bar-val">1,140</span></div>
+            <div class="bar profit" style="height:24%;"></div>
+          </div>
+          <div class="bar-label">11月</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-pair">
+            <div class="bar revenue" style="height:82%;"><span class="bar-val">1,620</span></div>
+            <div class="bar profit" style="height:36%;"></div>
+          </div>
+          <div class="bar-label">12月</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-pair">
+            <div class="bar revenue" style="height:72%;"><span class="bar-val">1,420</span></div>
+            <div class="bar profit" style="height:30%;"></div>
+          </div>
+          <div class="bar-label">1月</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-pair">
+            <div class="bar revenue" style="height:83%;"><span class="bar-val">1,645</span></div>
+            <div class="bar profit" style="height:37%;"></div>
+          </div>
+          <div class="bar-label">2月</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-pair">
+            <div class="bar revenue" style="height:93%;"><span class="bar-val">1,847</span></div>
+            <div class="bar profit" style="height:42%;"></div>
+          </div>
+          <div class="bar-label">3月</div>
+        </div>
+      </div>
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot rev"></div>売上（万円）</div>
+        <div class="legend-item"><div class="legend-dot prof"></div>粗利（万円）</div>
+      </div>
+    </div>
+
+    <div class="gauge-card">
+      <div class="gauge-title">今月の粗利率</div>
+      <svg class="gauge-svg" viewBox="0 0 160 100">
+        <path d="M 20 90 A 60 60 0 0 1 140 90" fill="none" stroke="#f1f3f4" stroke-width="12" stroke-linecap="round"/>
+        <path d="M 20 90 A 60 60 0 0 1 120 40" fill="none" stroke="#0f9d58" stroke-width="12" stroke-linecap="round"/>
+        <path d="M 20 90 A 60 60 0 0 1 40 40" fill="none" stroke="#e8f5e9" stroke-width="12" stroke-linecap="round" opacity="0.3"/>
+      </svg>
+      <div class="gauge-value">27.7%</div>
+      <div class="gauge-target">目標 25% ✓ 達成</div>
+    </div>
+  </div>
+
+  <div class="bottom-row">
+    <div class="project-card">
+      <div class="project-title">
+        進行中の案件
+        <span class="project-count">7件</span>
+      </div>
+      <div class="project-item">
+        <div>
+          <div class="project-name">渋谷区マンション3F リフォーム</div>
+          <div class="project-client">田中建設 様</div>
+        </div>
+        <div class="project-amount">¥3,132,690</div>
+        <div>
+          <div class="progress-bar"><div class="progress-fill high" style="width:85%;"></div></div>
+        </div>
+        <div class="progress-label">85%</div>
+      </div>
+      <div class="project-item">
+        <div>
+          <div class="project-name">世田谷区戸建て 外壁塗装</div>
+          <div class="project-client">佐藤工務店 様</div>
+        </div>
+        <div class="project-amount">¥1,890,000</div>
+        <div>
+          <div class="progress-bar"><div class="progress-fill mid" style="width:60%;"></div></div>
+        </div>
+        <div class="progress-label">60%</div>
+      </div>
+      <div class="project-item">
+        <div>
+          <div class="project-name">杉並区 キッチン水回り改修</div>
+          <div class="project-client">鈴木 様（個人）</div>
+        </div>
+        <div class="project-amount">¥980,000</div>
+        <div>
+          <div class="progress-bar"><div class="progress-fill low" style="width:25%;"></div></div>
+        </div>
+        <div class="progress-label">25%</div>
+      </div>
+      <div class="project-item">
+        <div>
+          <div class="project-name">新宿区オフィス 内装工事</div>
+          <div class="project-client">山田不動産 様</div>
+        </div>
+        <div class="project-amount">¥5,420,000</div>
+        <div>
+          <div class="progress-bar"><div class="progress-fill low" style="width:10%;"></div></div>
+        </div>
+        <div class="progress-label">10%</div>
+      </div>
+    </div>
+
+    <div class="ranking-card">
+      <div class="project-title">
+        案件別 粗利率ランキング
+        <span class="chart-period">今月</span>
+      </div>
+      <div class="ranking-item">
+        <div class="rank-num rank-1">1</div>
+        <div class="rank-info">
+          <div class="rank-name">杉並区 キッチン水回り改修</div>
+          <div class="rank-detail">材料費を最安仕入先に切替</div>
+        </div>
+        <div class="rank-value">32.1%</div>
+      </div>
+      <div class="ranking-item">
+        <div class="rank-num rank-2">2</div>
+        <div class="rank-info">
+          <div class="rank-name">渋谷区マンション3F リフォーム</div>
+          <div class="rank-detail">LIXIL直販で原価低減</div>
+        </div>
+        <div class="rank-value">28.5%</div>
+      </div>
+      <div class="ranking-item">
+        <div class="rank-num rank-3">3</div>
+        <div class="rank-info">
+          <div class="rank-name">世田谷区戸建て 外壁塗装</div>
+          <div class="rank-detail">足場費用が予想超過</div>
+        </div>
+        <div class="rank-value">21.3%</div>
+      </div>
+      <div class="ranking-item">
+        <div class="rank-num" style="background:#f1f3f4;color:#5f6368;">4</div>
+        <div class="rank-info">
+          <div class="rank-name">新宿区オフィス 内装工事</div>
+          <div class="rank-detail">着工前（見積ベース）</div>
+        </div>
+        <div class="rank-value">26.0%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

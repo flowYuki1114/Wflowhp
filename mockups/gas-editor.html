@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apps Script Editor Mock</title>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Google Sans', 'Roboto', sans-serif; background: #202124; overflow: hidden; }
+
+  .toolbar {
+    height: 48px; background: #202124; display: flex; align-items: center;
+    padding: 0 16px; border-bottom: 1px solid #3c4043; gap: 12px;
+  }
+  .toolbar-logo { display: flex; align-items: center; gap: 8px; }
+  .toolbar-logo svg { width: 24px; height: 24px; }
+  .toolbar-title { color: #e8eaed; font-size: 18px; font-weight: 400; }
+  .toolbar-project { color: #9aa0a6; font-size: 13px; margin-left: 4px; }
+  .toolbar-actions { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  .toolbar-btn {
+    background: #8ab4f8; color: #202124; border: none; padding: 6px 20px;
+    border-radius: 4px; font-size: 13px; font-weight: 500; cursor: pointer;
+    font-family: 'Google Sans', sans-serif;
+  }
+  .toolbar-btn-outline {
+    background: transparent; color: #8ab4f8; border: 1px solid #5f6368;
+    padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: pointer;
+    font-family: 'Google Sans', sans-serif;
+  }
+  .toolbar-icon { color: #9aa0a6; cursor: pointer; font-size: 20px; padding: 4px 8px; }
+
+  .menu-bar {
+    height: 32px; background: #292a2d; display: flex; align-items: center;
+    padding: 0 8px; gap: 2px; border-bottom: 1px solid #3c4043;
+  }
+  .menu-item {
+    color: #bdc1c6; font-size: 13px; padding: 4px 12px; border-radius: 4px;
+    cursor: pointer;
+  }
+  .menu-item:hover { background: #3c4043; }
+
+  .main { display: flex; height: calc(100vh - 80px); }
+
+  .sidebar {
+    width: 260px; background: #292a2d; border-right: 1px solid #3c4043;
+    padding: 12px 0; flex-shrink: 0;
+  }
+  .sidebar-header {
+    padding: 4px 16px 12px; font-size: 11px; font-weight: 500;
+    color: #9aa0a6; letter-spacing: 0.8px; text-transform: uppercase;
+  }
+  .sidebar-file {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 16px; font-size: 13px; color: #bdc1c6; cursor: pointer;
+  }
+  .sidebar-file:hover { background: #3c4043; }
+  .sidebar-file.active { background: #3c4043; color: #e8eaed; }
+  .sidebar-file-icon { font-size: 16px; color: #8ab4f8; width: 20px; text-align: center; }
+  .sidebar-section {
+    padding: 16px 16px 4px; font-size: 11px; color: #9aa0a6;
+    letter-spacing: 0.5px; border-top: 1px solid #3c4043; margin-top: 8px;
+  }
+
+  .editor { flex: 1; background: #1e1e1e; overflow: hidden; }
+  .tab-bar {
+    display: flex; background: #252526; height: 36px; align-items: center;
+    border-bottom: 1px solid #3c4043;
+  }
+  .tab {
+    padding: 0 16px; height: 36px; display: flex; align-items: center; gap: 6px;
+    font-size: 13px; color: #9aa0a6; border-right: 1px solid #3c4043; cursor: pointer;
+  }
+  .tab.active { background: #1e1e1e; color: #e8eaed; }
+  .tab-icon { color: #8ab4f8; font-size: 14px; }
+
+  .code-area { padding: 16px 0; font-family: 'Roboto Mono', monospace; font-size: 13.5px; line-height: 22px; overflow: auto; height: calc(100% - 36px); }
+  .code-line { display: flex; padding: 0 16px; min-height: 22px; }
+  .code-line:hover { background: rgba(255,255,255,0.03); }
+  .line-num {
+    width: 48px; text-align: right; padding-right: 20px;
+    color: #5a5a5a; user-select: none; flex-shrink: 0;
+  }
+  .line-content { flex: 1; white-space: pre; }
+
+  .kw { color: #c586c0; }
+  .fn { color: #dcdcaa; }
+  .str { color: #ce9178; }
+  .cmt { color: #6a9955; font-style: italic; }
+  .var { color: #9cdcfe; }
+  .num { color: #b5cea8; }
+  .obj { color: #4ec9b0; }
+  .prop { color: #9cdcfe; }
+  .op { color: #d4d4d4; }
+  .par { color: #ffd700; }
+  .brc { color: #da70d6; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-logo">
+    <svg viewBox="0 0 24 24" fill="#8ab4f8"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 15.5h-1.5V14h-2v4.5H7v-6h5v6zm5.5-1c0 .55-.45 1-1 1H14c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h2.5c.55 0 1 .45 1 1v4zm-1-3.5H14v3h2.5v-3z"/></svg>
+    <span class="toolbar-title">Apps Script</span>
+    <span class="toolbar-project">— 建設見積もり自動化</span>
+  </div>
+  <div class="toolbar-actions">
+    <span class="toolbar-btn-outline">▶ 実行</span>
+    <span class="toolbar-btn">デプロイ</span>
+    <span class="toolbar-icon">⋮</span>
+  </div>
+</div>
+
+<div class="menu-bar">
+  <span class="menu-item">ファイル</span>
+  <span class="menu-item">編集</span>
+  <span class="menu-item">表示</span>
+  <span class="menu-item">実行</span>
+  <span class="menu-item">ヘルプ</span>
+</div>
+
+<div class="main">
+  <div class="sidebar">
+    <div class="sidebar-header">ファイル</div>
+    <div class="sidebar-file active">
+      <span class="sidebar-file-icon">&lt;/&gt;</span> estimate.gs
+    </div>
+    <div class="sidebar-file">
+      <span class="sidebar-file-icon">&lt;/&gt;</span> customer_db.gs
+    </div>
+    <div class="sidebar-file">
+      <span class="sidebar-file-icon">&lt;/&gt;</span> progress_tracker.gs
+    </div>
+    <div class="sidebar-file">
+      <span class="sidebar-file-icon">&lt;/&gt;</span> notification.gs
+    </div>
+    <div class="sidebar-file">
+      <span class="sidebar-file-icon">&lt;/&gt;</span> dashboard.gs
+    </div>
+    <div class="sidebar-section">ライブラリ</div>
+    <div class="sidebar-file">
+      <span class="sidebar-file-icon">📦</span> Gmail
+    </div>
+    <div class="sidebar-file">
+      <span class="sidebar-file-icon">📦</span> DriveApp
+    </div>
+    <div class="sidebar-section">サービス</div>
+    <div class="sidebar-file">
+      <span class="sidebar-file-icon">⚙</span> Sheets API
+    </div>
+    <div class="sidebar-file">
+      <span class="sidebar-file-icon">⚙</span> Gmail API
+    </div>
+  </div>
+
+  <div class="editor">
+    <div class="tab-bar">
+      <div class="tab active"><span class="tab-icon">&lt;/&gt;</span> estimate.gs</div>
+      <div class="tab"><span class="tab-icon">&lt;/&gt;</span> customer_db.gs</div>
+    </div>
+    <div class="code-area">
+      <div class="code-line"><span class="line-num">1</span><span class="line-content"><span class="cmt">/**</span></span></div>
+      <div class="code-line"><span class="line-num">2</span><span class="line-content"><span class="cmt"> * 建設・リフォーム見積もり自動生成</span></span></div>
+      <div class="code-line"><span class="line-num">3</span><span class="line-content"><span class="cmt"> * フォーム入力 → 見積書PDF → メール送信</span></span></div>
+      <div class="code-line"><span class="line-num">4</span><span class="line-content"><span class="cmt"> */</span></span></div>
+      <div class="code-line"><span class="line-num">5</span><span class="line-content"></span></div>
+      <div class="code-line"><span class="line-num">6</span><span class="line-content"><span class="kw">function</span> <span class="fn">createEstimate</span><span class="par">(</span><span class="var">formData</span><span class="par">)</span> <span class="brc">{</span></span></div>
+      <div class="code-line"><span class="line-num">7</span><span class="line-content">  <span class="kw">var</span> <span class="var">ss</span> <span class="op">=</span> <span class="obj">SpreadsheetApp</span><span class="op">.</span><span class="fn">getActiveSpreadsheet</span><span class="par">()</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">8</span><span class="line-content">  <span class="kw">var</span> <span class="var">priceSheet</span> <span class="op">=</span> <span class="var">ss</span><span class="op">.</span><span class="fn">getSheetByName</span><span class="par">(</span><span class="str">'単価マスタ'</span><span class="par">)</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">9</span><span class="line-content">  <span class="kw">var</span> <span class="var">template</span> <span class="op">=</span> <span class="var">ss</span><span class="op">.</span><span class="fn">getSheetByName</span><span class="par">(</span><span class="str">'見積テンプレート'</span><span class="par">)</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">10</span><span class="line-content"></span></div>
+      <div class="code-line"><span class="line-num">11</span><span class="line-content">  <span class="cmt">// 材料費・工賃を単価マスタから自動取得</span></span></div>
+      <div class="code-line"><span class="line-num">12</span><span class="line-content">  <span class="kw">var</span> <span class="var">materials</span> <span class="op">=</span> <span class="fn">lookupMaterials_</span><span class="par">(</span><span class="var">priceSheet</span><span class="op">,</span> <span class="var">formData</span><span class="op">.</span><span class="prop">items</span><span class="par">)</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">13</span><span class="line-content">  <span class="kw">var</span> <span class="var">laborCost</span> <span class="op">=</span> <span class="fn">calculateLabor_</span><span class="par">(</span><span class="var">formData</span><span class="op">.</span><span class="prop">area</span><span class="op">,</span> <span class="var">formData</span><span class="op">.</span><span class="prop">type</span><span class="par">)</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">14</span><span class="line-content"></span></div>
+      <div class="code-line"><span class="line-num">15</span><span class="line-content">  <span class="cmt">// 粗利率を考慮した最終見積額を算出</span></span></div>
+      <div class="code-line"><span class="line-num">16</span><span class="line-content">  <span class="kw">var</span> <span class="var">subtotal</span> <span class="op">=</span> <span class="var">materials</span><span class="op">.</span><span class="prop">total</span> <span class="op">+</span> <span class="var">laborCost</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">17</span><span class="line-content">  <span class="kw">var</span> <span class="var">margin</span> <span class="op">=</span> <span class="var">subtotal</span> <span class="op">*</span> <span class="num">0.25</span><span class="op">;</span>  <span class="cmt">// 粗利 25%</span></span></div>
+      <div class="code-line"><span class="line-num">18</span><span class="line-content">  <span class="kw">var</span> <span class="var">tax</span> <span class="op">=</span> <span class="par">(</span><span class="var">subtotal</span> <span class="op">+</span> <span class="var">margin</span><span class="par">)</span> <span class="op">*</span> <span class="num">0.10</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">19</span><span class="line-content"></span></div>
+      <div class="code-line"><span class="line-num">20</span><span class="line-content">  <span class="cmt">// テンプレートに流し込み → PDF化</span></span></div>
+      <div class="code-line"><span class="line-num">21</span><span class="line-content">  <span class="kw">var</span> <span class="var">newSheet</span> <span class="op">=</span> <span class="var">template</span><span class="op">.</span><span class="fn">copyTo</span><span class="par">(</span><span class="var">ss</span><span class="par">)</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">22</span><span class="line-content">  <span class="fn">fillEstimateData_</span><span class="par">(</span><span class="var">newSheet</span><span class="op">,</span> <span class="brc">{</span></span></div>
+      <div class="code-line"><span class="line-num">23</span><span class="line-content">    <span class="prop">customer</span><span class="op">:</span>  <span class="var">formData</span><span class="op">.</span><span class="prop">customerName</span><span class="op">,</span></span></div>
+      <div class="code-line"><span class="line-num">24</span><span class="line-content">    <span class="prop">project</span><span class="op">:</span>   <span class="var">formData</span><span class="op">.</span><span class="prop">projectName</span><span class="op">,</span></span></div>
+      <div class="code-line"><span class="line-num">25</span><span class="line-content">    <span class="prop">materials</span><span class="op">:</span> <span class="var">materials</span><span class="op">.</span><span class="prop">breakdown</span><span class="op">,</span></span></div>
+      <div class="code-line"><span class="line-num">26</span><span class="line-content">    <span class="prop">labor</span><span class="op">:</span>     <span class="var">laborCost</span><span class="op">,</span></span></div>
+      <div class="code-line"><span class="line-num">27</span><span class="line-content">    <span class="prop">subtotal</span><span class="op">:</span>  <span class="var">subtotal</span><span class="op">,</span></span></div>
+      <div class="code-line"><span class="line-num">28</span><span class="line-content">    <span class="prop">margin</span><span class="op">:</span>    <span class="var">margin</span><span class="op">,</span></span></div>
+      <div class="code-line"><span class="line-num">29</span><span class="line-content">    <span class="prop">tax</span><span class="op">:</span>       <span class="var">tax</span><span class="op">,</span></span></div>
+      <div class="code-line"><span class="line-num">30</span><span class="line-content">    <span class="prop">total</span><span class="op">:</span>     <span class="var">subtotal</span> <span class="op">+</span> <span class="var">margin</span> <span class="op">+</span> <span class="var">tax</span></span></div>
+      <div class="code-line"><span class="line-num">31</span><span class="line-content">  <span class="brc">}</span><span class="par">)</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">32</span><span class="line-content"></span></div>
+      <div class="code-line"><span class="line-num">33</span><span class="line-content">  <span class="kw">var</span> <span class="var">pdf</span> <span class="op">=</span> <span class="fn">exportSheetAsPdf_</span><span class="par">(</span><span class="var">ss</span><span class="op">.</span><span class="fn">getId</span><span class="par">()</span><span class="op">,</span> <span class="var">newSheet</span><span class="op">.</span><span class="fn">getSheetId</span><span class="par">()</span><span class="par">)</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">34</span><span class="line-content"></span></div>
+      <div class="code-line"><span class="line-num">35</span><span class="line-content">  <span class="cmt">// 顧客にメール自動送信</span></span></div>
+      <div class="code-line"><span class="line-num">36</span><span class="line-content">  <span class="obj">GmailApp</span><span class="op">.</span><span class="fn">sendEmail</span><span class="par">(</span><span class="var">formData</span><span class="op">.</span><span class="prop">email</span><span class="op">,</span></span></div>
+      <div class="code-line"><span class="line-num">37</span><span class="line-content">    <span class="str">'【お見積書】'</span> <span class="op">+</span> <span class="var">formData</span><span class="op">.</span><span class="prop">projectName</span><span class="op">,</span></span></div>
+      <div class="code-line"><span class="line-num">38</span><span class="line-content">    <span class="str">'お見積書を添付いたします。ご確認ください。'</span><span class="op">,</span></span></div>
+      <div class="code-line"><span class="line-num">39</span><span class="line-content">    <span class="brc">{</span> <span class="prop">attachments</span><span class="op">:</span> <span class="par">[</span><span class="var">pdf</span><span class="par">]</span> <span class="brc">}</span></span></div>
+      <div class="code-line"><span class="line-num">40</span><span class="line-content">  <span class="par">)</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">41</span><span class="line-content"></span></div>
+      <div class="code-line"><span class="line-num">42</span><span class="line-content">  <span class="cmt">// 顧客DBに記録</span></span></div>
+      <div class="code-line"><span class="line-num">43</span><span class="line-content">  <span class="fn">logToCustomerDb_</span><span class="par">(</span><span class="var">formData</span><span class="op">.</span><span class="prop">customerName</span><span class="op">,</span> <span class="str">'見積送付'</span><span class="op">,</span> <span class="kw">new</span> <span class="obj">Date</span><span class="par">()</span><span class="par">)</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">44</span><span class="line-content">  <span class="obj">Logger</span><span class="op">.</span><span class="fn">log</span><span class="par">(</span><span class="str">'見積書送信完了: '</span> <span class="op">+</span> <span class="var">formData</span><span class="op">.</span><span class="prop">projectName</span><span class="par">)</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">45</span><span class="line-content"><span class="brc">}</span></span></div>
+      <div class="code-line"><span class="line-num">46</span><span class="line-content"></span></div>
+      <div class="code-line"><span class="line-num">47</span><span class="line-content"><span class="cmt">/**</span></span></div>
+      <div class="code-line"><span class="line-num">48</span><span class="line-content"><span class="cmt"> * 単価マスタを元に材料費を自動計算</span></span></div>
+      <div class="code-line"><span class="line-num">49</span><span class="line-content"><span class="cmt"> */</span></span></div>
+      <div class="code-line"><span class="line-num">50</span><span class="line-content"><span class="kw">function</span> <span class="fn">lookupMaterials_</span><span class="par">(</span><span class="var">sheet</span><span class="op">,</span> <span class="var">items</span><span class="par">)</span> <span class="brc">{</span></span></div>
+      <div class="code-line"><span class="line-num">51</span><span class="line-content">  <span class="kw">var</span> <span class="var">masterData</span> <span class="op">=</span> <span class="var">sheet</span><span class="op">.</span><span class="fn">getDataRange</span><span class="par">()</span><span class="op">.</span><span class="fn">getValues</span><span class="par">()</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">52</span><span class="line-content">  <span class="kw">var</span> <span class="var">breakdown</span> <span class="op">=</span> <span class="par">[]</span><span class="op">;</span></span></div>
+      <div class="code-line"><span class="line-num">53</span><span class="line-content">  <span class="kw">var</span> <span class="var">total</span> <span class="op">=</span> <span class="num">0</span><span class="op">;</span></span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

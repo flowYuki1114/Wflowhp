@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /Wflow/
+Disallow: /mockups/
 
-Sitemap: https://w-flow.jp/sitemap.xml
+Sitemap: https://wflowhp.pages.dev/sitemap.xml
